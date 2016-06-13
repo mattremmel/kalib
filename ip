@@ -12,6 +12,8 @@
 #
 #  Return:      A 1 is returned if the external IP address cannot 
 #               be retreived. A 0 is returned otherwise. 
+#
+#  Dependency:  wget
 # ------------------------------------------------------------------
 
 # --- Version and Usage ---
@@ -19,11 +21,12 @@ VERSION=0.1.0
 USAGE="Usage: ip"
 
 
+# --- Dependecy Check ---
+command -v wget >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency wget not installed. Exiting."; exit 1; }
+
+
 # --- Main Body ---
 exitcode=0
-
-# Check that dependencies are installed
-command -v wget >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency wget not installed. Exiting."; exit 1; }
 
 # Get internal IP address
 localip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
