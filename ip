@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Check that dependencies are installed
+command -v wget >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency wget not installed. Exiting."; exit 1; }
+
+# Get internal IP address
+localip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
+
+# Get external IP address if available
+ipecho=`wget -qO- http://www.ipecho.net/plain`
+
+if [ $? -eq 0 ]; then
+    externalip=$ipecho
+else
+    externalip="Could not retreive external IP address. Check connection."
+fi
+
+# Print IP address information
+echo "Internal: $localip"
+echo "External: $externalip"
+
+exit 0
