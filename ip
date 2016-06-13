@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # ------------------------------------------------------------------
 #  Author: Matthew Remmel (matt.remmel@gmail.com) 
 #  Title: IP
@@ -13,6 +14,12 @@
 #               be retreived. A 0 is returned otherwise. 
 # ------------------------------------------------------------------
 
+# --- Version and Usage ---
+VERSION=0.1.0
+USAGE="Usage: ip"
+
+
+# --- Main Body ---
 exitcode=0
 
 # Check that dependencies are installed
