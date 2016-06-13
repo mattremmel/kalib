@@ -22,10 +22,10 @@ VERSION=0.2.0
 USAGE="Usage: ip [OPTION]
 
 Options:
--h, --help       Show help and usage information.
--v, --version    Show version information.
--i, --internal   Show internal ip address only.
--e, --external   Show external ip address only."
+-h, --help       Show help and usage information
+-v, --version    Show version information
+-i, --internal   Show internal ip address only
+-e, --external   Show external ip address only"
 
 
 # --- Dependecy Check ---
