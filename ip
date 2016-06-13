@@ -1,4 +1,17 @@
 #!/bin/bash
+# ------------------------------------------------------------------
+#  Author: Matthew Remmel (matt.remmel@gmail.com) 
+#  Title: IP
+#
+#  Description: IP is a command line util to display the primary
+#               internal IP address, as well as the external IP
+#               address. The script uses 'wget' and 'ipecho.net'
+#               to retrieve the external IP address. The output
+#               is formatted and echoed to standard out.
+#
+#  Return:      A 1 is returned if the external IP address cannot 
+#               be retreived. A 0 is returned otherwise. 
+# ------------------------------------------------------------------
 
 exitcode=0
 
