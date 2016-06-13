@@ -17,32 +17,81 @@
 # ------------------------------------------------------------------
 
 # --- Version and Usage ---
-VERSION=0.1.0
-USAGE="Usage: ip"
+DESCRIPTION="Description: Displays internal and external ip addresses"
+VERSION=0.2.0
+USAGE="Usage: ip [OPTION]
+
+Options:
+-h, --help       Show help and usage information.
+-v, --version    Show version information.
+-i, --internal   Show internal ip address only.
+-e, --external   Show external ip address only."
 
 
 # --- Dependecy Check ---
 command -v wget >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency wget not installed. Exiting."; exit 1; }
 
 
+# --- Arguments ---
+INTERNALONLY=1
+EXTERNALONLY=1
+
+while [[ $# > 0 ]]
+do
+    key="$1"
+    
+    case $key in
+	-h|--help)
+	    echo "$DESCRIPTION"
+	    echo
+	    echo "$USAGE"
+	    echo
+	    exit 0
+	    ;;
+	-v|--version)
+	    echo "Version: $VERSION"
+	    exit 0
+	    ;;
+	-i|--internal)
+	    INTERNALONLY=0
+	    ;;
+	-e|--external)
+	    EXTERNALONLY=0
+	    ;;
+	*)
+	    echo "Unknown argument: $key"
+	    exit 1
+	    ;;
+    esac
+    
+    shift
+done
+
+
 # --- Main Body ---
-exitcode=0
+EXITCODE=0
 
 # Get internal IP address
-localip=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
+LOCALIP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 
 # Get external IP address if available
-ipecho=`wget -qO- http://www.ipecho.net/plain`
+IPECHO=`wget -qO- http://www.ipecho.net/plain`
 
 if [ $? -eq 0 ]; then
-    externalip=$ipecho
+    EXTERNALIP=$IPECHO
 else
-    externalip="Could not retreive external IP address. Check connection."
-    exitcode=1
+    EXTERNALIP="Could not retreive external IP address. Check connection."
+    EXITCODE=1
 fi
 
 # Print IP address information
-echo "Internal: $localip"
-echo "External: $externalip"
+if [ $INTERNALONLY -eq 0 ]; then
+    echo $LOCALIP
+elif [ $EXTERNALONLY -eq 0 ]; then
+    echo $EXTERNALIP
+else
+    echo "Internal: $LOCALIP"
+    echo "External: $EXTERNALIP"
+fi
 
-exit $exitcode
+exit $EXITCODE
