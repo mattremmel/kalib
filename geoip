@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # ------------------------------------------------------------------
-#  Author: Matthew Remmel (matt.remmel@gmail.com) 
+#  Author: Matthew Remmel (matt.remmel@gmail.com)
 #  Title: GeoIP
 #
 #  Description: GeoIP retreives the geographical information for
 #               the supplied IP address.
 #
 #  Return:      A 1 is returned if the IP information is retrieved
-#               successfully. A 1 is returned otherwise. 
+#               successfully. A 1 is returned otherwise.
 #
 #  Dependency:  curl
 # ------------------------------------------------------------------
@@ -21,7 +21,7 @@ USAGE="Usage: geoip [OPTION] [IP Address]
 Options:
 -h, --help       Show help and usage information
 -v, --version    Show version information
--r, --raw        Show raw output
+-r, --raw        Show raw json output
 -n, --no-format  Show only unformatted data"
 
 # --- Dependecy Check ---
@@ -45,31 +45,24 @@ NOFORMAT=1
 while [[ $# > 1 ]]
 do
     key="$1"
-    
+
     case $key in
 	-h|--help)
-	    echo "$DESCRIPTION"
-	    echo
-	    echo "$USAGE"
-	    echo
-	    exit 0
-	    ;;
+	    echo "$DESCRIPTION"; echo
+	    echo "$USAGE"; echo
+	    exit 0;;
 	-v|--version)
 	    echo "Version: $VERSION"
-	    exit 0
-	    ;;
+	    exit 0;;
 	-r|--raw)
-	   RAWOUTPUT=0
-	   ;;
+	   RAWOUTPUT=0;;
 	-n|--no-format)
-	    NOFORMAT=0
-	    ;;
+	    NOFORMAT=0;;
 	*)
 	    echo "Unknown argument: $key"
-	    exit 1
-	    ;;
+	    exit 1;;
     esac
-    
+
     shift
 done
 
@@ -110,8 +103,8 @@ REGION=`echo $GEODATA | grep -o '"region":\s"[^,]*' | cut -d"\"" -f4`
 COUNTRY=`echo $GEODATA | grep -o '"country":\s"[^,]*' | cut -d"\"" -f4`
 
 # Location
-LATITUDE=`echo $GEODATA | grep -o '"loc":\s"[^,]*' | cut -d"\"" -f4 | cut -d"," -f1`
-LONGITUDE=`echo $GEODATA | grep -o '"loc":\s"[^,]*' | cut -d"\"" -f4 | cut -d"," -f2`
+LATITUDE=`echo $GEODATA | grep -o '"loc":\s"[^"]*' | cut -d"\"" -f4 | cut -d"," -f1`
+LONGITUDE=`echo $GEODATA | grep -o '"loc":\s"[^"]*' | cut -d"\"" -f4 | cut -d"," -f2`
 
 # Organization
 ORGANIZATION=`echo $GEODATA | grep -o '"org":\s"[^,]*' | cut -d"\"" -f4`
