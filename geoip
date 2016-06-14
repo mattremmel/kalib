@@ -108,7 +108,7 @@ COUNTRY=`echo $GEODATA | grep -o '"country":\s"[^ ,]*' | cut -d"\"" -f4`
 LOCATION=
 
 # Organization
-ORGANIZATION=
+ORGANIZATION=`echo $GEODATA | grep -o '"org":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # Postal Code
 POSTAL=
