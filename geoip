@@ -99,7 +99,7 @@ HOST=`echo $GEODATA | grep -o '"hostname":\s"[^ ,]*' | cut -d"\"" -f4`
 CITY=`echo $GEODATA | grep -o '"city":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # Region
-REGION=
+REGION=`echo $GEODATA | grep -o '"region":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # Country
 COUNTRY=
