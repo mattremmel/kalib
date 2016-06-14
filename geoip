@@ -105,7 +105,8 @@ REGION=`echo $GEODATA | grep -o '"region":\s"[^ ,]*' | cut -d"\"" -f4`
 COUNTRY=`echo $GEODATA | grep -o '"country":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # Location
-LOCATION=
+LAT=`echo $GEODATA | grep -o '"loc":\s"[^ ]*' | cut -d"\"" -f4 | cut -d"," -f1`
+LONG=`echo $GEODATA | grep -o '"loc":\s"[^ ]*' | cut -d"\"" -f4 | cut -d"," -f2`
 
 # Organization
 ORGANIZATION=`echo $GEODATA | grep -o '"org":\s"[^ ,]*' | cut -d"\"" -f4`
