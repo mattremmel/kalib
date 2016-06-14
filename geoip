@@ -96,7 +96,7 @@ IP=`echo $GEODATA | grep -o '"ip":\s"[^ ,]*' | cut -d"\"" -f4`
 HOST=`echo $GEODATA | grep -o '"hostname":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # City
-CITY=
+CITY=`echo $GEODATA | grep -o '"city":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # Region
 REGION=
