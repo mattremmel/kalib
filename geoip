@@ -102,7 +102,7 @@ CITY=`echo $GEODATA | grep -o '"city":\s"[^ ,]*' | cut -d"\"" -f4`
 REGION=`echo $GEODATA | grep -o '"region":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # Country
-COUNTRY=
+COUNTRY=`echo $GEODATA | grep -o '"country":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # Location
 LOCATION=
