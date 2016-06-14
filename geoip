@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# ------------------------------------------------------------------
+#  Author: Matthew Remmel (matt.remmel@gmail.com) 
+#  Title: GeoIP
+#
+#  Description: GeoIP retreives the geographical information for
+#               the supplied IP address.
+#
+#  Return:      A 1 is returned if the IP information is retrieved
+#               successfully. A 1 is returned otherwise. 
+#
+#  Dependency:  curl
+# ------------------------------------------------------------------
+
+# --- Version and Usage ---
+DESCRIPTION="Description: Displays the geographical information for the supplied IP address"
+VERSION=0.1.0
+USAGE="Usage: geoip [OPTION] [IP Address]
+
+Options:
+-h, --help       Show help and usage information
+-v, --version    Show version information"
+
+# --- Dependecy Check ---
+command -v curl >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency curl not installed. Exiting."; exit 1; }
+
+
+# --- Arguments ---
+# Check that there is at least one argument. If not show usage.
+if [ $# -eq 0 ]; then
+    echo "$DESCRIPTION"
+    echo
+    echo "$USAGE"
+    echo
+    exit 1
+fi
+
+# Handle arguments
+while [[ $# > 1 ]]
+do
+    key="$1"
+    
+    case $key in
+	-h|--help)
+	    echo "$DESCRIPTION"
+	    echo
+	    echo "$USAGE"
+	    echo
+	    exit 0
+	    ;;
+	-v|--version)
+	    echo "Version: $VERSION"
+	    exit 0
+	    ;;
+	*)
+	    echo "Unknown argument: $key"
+	    exit 1
+	    ;;
+    esac
+    
+    shift
+done
+
+IP=$1
+
+
+# --- Main Body ---
+# Retreive geolocation data from ipinfo.io
+GEODATA=`curl ipinfo.io/$IP 2>/dev/null`
+
+if [ $? -ne 0 ]; then
+    echo "[ERROR] Error retreiving geolocation data. Check connection."
+    exit 1
+fi
+
+echo "$GEODATA"
+
+exit 0
