@@ -21,7 +21,8 @@ USAGE="Usage: geoip [OPTION] [IP Address]
 Options:
 -h, --help       Show help and usage information
 -v, --version    Show version information
--r, --raw        Show raw output"
+-r, --raw        Show raw output
+-n, --no-format  Show only unformatted data"
 
 # --- Dependecy Check ---
 command -v curl >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency curl not installed. Exiting."; exit 1; }
@@ -39,6 +40,7 @@ fi
 
 # Handle arguments
 RAWOUTPUT=1
+NOFORMAT=1
 
 while [[ $# > 1 ]]
 do
@@ -59,6 +61,9 @@ do
 	-r|--raw)
 	   RAWOUTPUT=0
 	   ;;
+	-n|--no-format)
+	    NOFORMAT=0
+	    ;;
 	*)
 	    echo "Unknown argument: $key"
 	    exit 1
@@ -105,13 +110,29 @@ REGION=`echo $GEODATA | grep -o '"region":\s"[^ ,]*' | cut -d"\"" -f4`
 COUNTRY=`echo $GEODATA | grep -o '"country":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # Location
-LAT=`echo $GEODATA | grep -o '"loc":\s"[^ ]*' | cut -d"\"" -f4 | cut -d"," -f1`
-LONG=`echo $GEODATA | grep -o '"loc":\s"[^ ]*' | cut -d"\"" -f4 | cut -d"," -f2`
+LATITUDE=`echo $GEODATA | grep -o '"loc":\s"[^ ]*' | cut -d"\"" -f4 | cut -d"," -f1`
+LONGITUDE=`echo $GEODATA | grep -o '"loc":\s"[^ ]*' | cut -d"\"" -f4 | cut -d"," -f2`
 
 # Organization
 ORGANIZATION=`echo $GEODATA | grep -o '"org":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # Postal Code
 POSTAL=`echo $GEODATA | grep -o '"postal":\s"[^ ,]*' | cut -d"\"" -f4`
+
+
+# Print all information
+if [ $NOFORMAT -eq 0 ]; then
+    echo $IP; echo $HOST; echo $CITY; echo $REGION; echo $COUNTRY; echo $LATITUDE; echo $LONGITUDE; echo $ORGANIZATION; echo $POSTAL;
+else
+    echo "IP:            $IP"
+    echo "Host:          $HOST"
+    echo "City:          $CITY"
+    echo "Region:        $REGION"
+    echo "Country:       $COUNTRY"
+    echo "Latitude:      $LATITUDE"
+    echo "Longitude:     $LONGITUDE"
+    echo "Organization:  $ORGANIZATION"
+    echo "Postal:        $POSTAL"
+fi
 
 exit 0
