@@ -111,6 +111,6 @@ LOCATION=
 ORGANIZATION=`echo $GEODATA | grep -o '"org":\s"[^ ,]*' | cut -d"\"" -f4`
 
 # Postal Code
-POSTAL=
+POSTAL=`echo $GEODATA | grep -o '"postal":\s"[^ ,]*' | cut -d"\"" -f4`
 
 exit 0
