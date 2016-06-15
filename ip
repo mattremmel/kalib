@@ -18,7 +18,7 @@
 
 # --- Version and Usage ---
 DESCRIPTION="Description: Displays internal and external ip addresses"
-VERSION=0.2.0
+VERSION=0.2.1
 USAGE="Usage: ip [OPTION]
 
 Options:
@@ -75,7 +75,7 @@ EXITCODE=0
 LOCALIP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
 
 # Get external IP address if available
-IPECHO=`wget -qO- http://www.ipecho.net/plain`
+IPECHO=`wget --timeout 3 -qO- http://www.ipecho.net/plain`
 
 if [ $? -eq 0 ]; then
     EXTERNALIP=$IPECHO
@@ -90,7 +90,10 @@ if [ $INTERNALONLY -eq 0 ]; then
 elif [ $EXTERNALONLY -eq 0 ]; then
     echo $EXTERNALIP
 else
-    echo "Internal: $LOCALIP"
+    for ADDR in $LOCALIP; do
+	echo "Internal: $ADDR"
+    done
+
     echo "External: $EXTERNALIP"
 fi
 
