@@ -71,7 +71,7 @@ IP=$1
 
 # --- Main Body ---
 # Retreive geolocation data from ipinfo.io
-GEODATA=`curl ipinfo.io/$IP 2>/dev/null`
+GEODATA=$(curl ipinfo.io/$IP 2>/dev/null)
 
 if [ $? -ne 0 ]; then
     echo "[ERROR] Error retreiving geolocation data. Check connection."
@@ -88,29 +88,29 @@ fi
 # TODO: Make sure that returned data is valid JSON. Can probably happen while being parsed
 
 # IP Address
-IP=`echo $GEODATA | grep -o '"ip":\s"[^,]*' | cut -d"\"" -f4`
+IP=$(echo $GEODATA | grep -o '"ip":\s"[^,]*' | cut -d"\"" -f4)
 
 # Hostname
-HOST=`echo $GEODATA | grep -o '"hostname":\s"[^,]*' | cut -d"\"" -f4`
+HOST=$(echo $GEODATA | grep -o '"hostname":\s"[^,]*' | cut -d"\"" -f4)
 
 # City
-CITY=`echo $GEODATA | grep -o '"city":\s"[^,]*' | cut -d"\"" -f4`
+CITY=$(echo $GEODATA | grep -o '"city":\s"[^,]*' | cut -d"\"" -f4)
 
 # Region
-REGION=`echo $GEODATA | grep -o '"region":\s"[^,]*' | cut -d"\"" -f4`
+REGION=$(echo $GEODATA | grep -o '"region":\s"[^,]*' | cut -d"\"" -f4)
 
 # Country
-COUNTRY=`echo $GEODATA | grep -o '"country":\s"[^,]*' | cut -d"\"" -f4`
+COUNTRY=$(echo $GEODATA | grep -o '"country":\s"[^,]*' | cut -d"\"" -f4)
 
 # Location
-LATITUDE=`echo $GEODATA | grep -o '"loc":\s"[^"]*' | cut -d"\"" -f4 | cut -d"," -f1`
-LONGITUDE=`echo $GEODATA | grep -o '"loc":\s"[^"]*' | cut -d"\"" -f4 | cut -d"," -f2`
+LATITUDE=$(echo $GEODATA | grep -o '"loc":\s"[^"]*' | cut -d"\"" -f4 | cut -d"," -f1)
+LONGITUDE=$(echo $GEODATA | grep -o '"loc":\s"[^"]*' | cut -d"\"" -f4 | cut -d"," -f2)
 
 # Organization
-ORGANIZATION=`echo $GEODATA | grep -o '"org":\s"[^,]*' | cut -d"\"" -f4`
+ORGANIZATION=$(echo $GEODATA | grep -o '"org":\s"[^,]*' | cut -d"\"" -f4)
 
 # Postal Code
-POSTAL=`echo $GEODATA | grep -o '"postal":\s"[^,]*' | cut -d"\"" -f4`
+POSTAL=$(echo $GEODATA | grep -o '"postal":\s"[^,]*' | cut -d"\"" -f4)
 
 
 # Print all information
