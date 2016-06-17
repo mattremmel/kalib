@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ------------------------------------------------------------------
-#  Author: Matthew Remmel (matt.remmel@gmail.com) 
+#  Author: Matthew Remmel (matt.remmel@gmail.com)
 #  Title: IP
 #
 #  Description: IP is a command line util to display the primary
@@ -10,8 +10,8 @@
 #               to retrieve the external IP address. The output
 #               is formatted and echoed to standard out.
 #
-#  Return:      A 1 is returned if the external IP address cannot 
-#               be retreived. A 0 is returned otherwise. 
+#  Return:      A 1 is returned if the external IP address cannot
+#               be retreived. A 0 is returned otherwise.
 #
 #  Dependency:  wget
 # ------------------------------------------------------------------
@@ -39,7 +39,7 @@ EXTERNALONLY=1
 while [[ $# > 0 ]]
 do
     key="$1"
-    
+
     case $key in
 	-h|--help)
 	    echo "$DESCRIPTION"
@@ -63,7 +63,7 @@ do
 	    exit 1
 	    ;;
     esac
-    
+
     shift
 done
 
@@ -72,10 +72,10 @@ done
 EXITCODE=0
 
 # Get internal IP address
-LOCALIP=`ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'`
+LOCALIP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 
 # Get external IP address if available
-IPECHO=`wget --timeout 5 -qO- http://www.ipecho.net/plain`
+IPECHO=$(wget --timeout 5 -qO- http://www.ipecho.net/plain)
 
 if [ $? -eq 0 ]; then
     EXTERNALIP=$IPECHO
