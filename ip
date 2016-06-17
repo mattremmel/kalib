@@ -6,7 +6,7 @@
 #
 #  Description: IP is a command line util to display the primary
 #               internal IP address, as well as the external IP
-#               address. The script uses 'wget' and 'ipecho.net'
+#               address. The script uses 'curl' and 'ipecho.net'
 #               to retrieve the external IP address. The output
 #               is formatted and echoed to standard out.
 #
@@ -29,7 +29,7 @@ Options:
 
 
 # --- Dependecy Check ---
-command -v wget >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency wget not installed. Exiting."; exit 1; }
+command -v curl >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency curl not installed. Exiting."; exit 1; }
 
 
 # --- Arguments ---
@@ -75,7 +75,7 @@ EXITCODE=0
 LOCALIP=$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')
 
 # Get external IP address if available
-IPECHO=$(wget --timeout 5 -qO- http://www.ipecho.net/plain)
+IPECHO=$(curl -m 5 http://ipecho.net/plain 2>/dev/null)
 
 if [ $? -eq 0 ]; then
     EXTERNALIP=$IPECHO
