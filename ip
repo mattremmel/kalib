@@ -18,7 +18,7 @@
 
 # --- Version and Usage ---
 DESCRIPTION="Description: Displays internal and external ip addresses"
-VERSION=0.2.1
+VERSION=0.2.2
 USAGE="Usage: ip [OPTION]
 
 Options:
@@ -28,7 +28,7 @@ Options:
 -e, --external   Show external ip address only"
 
 # --- Dependecy Check ---
-command -v curl >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency curl not installed. Exiting."; exit 1; }
+command -v curl >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'curl' not installed. Exiting."; exit 1; }
 
 # --- Arguments ---
 INTERNALONLY=1
