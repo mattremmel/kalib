@@ -12,13 +12,15 @@
 # ------------------------------------------------------------------
 
 # --- Version and Usage ---
-DESCRIPTION="Description: Writes a formatted log message to standard out."
-VERSION=0.1.0
+DESCRIPTION="Description: Writes a formatted log message to standard out
+or to the specified log file."
+VERSION=0.2.0
 USAGE="Usage: log [OPTIONS] MESSAGE
 
 Options:
 -h, --help       Show help and usage information
 -v, --version    Show version information
+-l, --logfile    Specify log file to write to
 -t, --trace      Return trace style message
 -d, --debug      Return debug style message
 -i, --info       Return info style message
@@ -40,6 +42,7 @@ if [ $# -eq 0 ]; then
 fi
 
 LOGLEVEL=""
+LOGFILE=""
 
 while [[ $# > 0 ]]
 do
@@ -53,6 +56,9 @@ do
 	-v|--version)
 	    echo "Version: $VERSION"
 	    exit 0;;
+  -l|--logfile)
+      LOGFILE=$2
+      shift;;
 	-t|--trace)
 	    LOGLEVEL="[TRACE]";;
 	-d|--debug)
@@ -78,6 +84,10 @@ done
 # --- Main Body ---
 DATE=$(date "+%Y-%m-%d %H:%M:%S")
 
-echo "$DATE $LOGLEVEL $MESSAGE"
+if [ $LOGFILE = "" ]; then
+  echo "$DATE $LOGLEVEL $MESSAGE"
+else
+  echo "$DATE $LOGLEVEL $MESSAGE" >> $LOGFILE
+fi
 
 exit 0
