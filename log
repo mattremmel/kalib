@@ -82,7 +82,7 @@ done
 # --- Main Body ---
 DATE=$(date "+%Y-%m-%d %H:%M:%S")
 
-if [ $LOGFILE = "" ]; then
+if [ "$LOGFILE" = "" ]; then
   echo "$DATE $LOGLEVEL $MESSAGE"
 else
   echo "$DATE $LOGLEVEL $MESSAGE" >> $LOGFILE
