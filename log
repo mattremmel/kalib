@@ -12,13 +12,19 @@
 # ------------------------------------------------------------------
 
 # --- Version and Usage ---
-DESCRIPTION="Description: Writes a formatted log message to standard out"
+DESCRIPTION="Description: Writes a formatted log message to standard out."
 VERSION=0.1.0
 USAGE="Usage: log [OPTIONS] MESSAGE
 
 Options:
 -h, --help       Show help and usage information
--v, --version    Show version information"
+-v, --version    Show version information
+-t, --trace      Return trace style message
+-d, --debug      Return debug style message
+-i, --info       Return info style message
+-w, --warning    Return warning style message
+-e, --error      Return error style message
+-f, --fatal      Return fatal style message"
 
 # --- Dependecy Check ---
 command -v date >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'date' not installed. Exiting."; exit 1; }
@@ -32,3 +38,46 @@ if [ $# -eq 0 ]; then
     echo
     exit 1
 fi
+
+LOGLEVEL=""
+
+while [[ $# > 0 ]]
+do
+    key="$1"
+
+    case $key in
+	-h|--help)
+	    echo "$DESCRIPTION"; echo
+	    echo "$USAGE"; echo
+	    exit 0;;
+	-v|--version)
+	    echo "Version: $VERSION"
+	    exit 0;;
+	-t|--trace)
+	    LOGLEVEL="[TRACE]";;
+	-d|--debug)
+	    LOGLEVEL="[DEBUG]";;
+  -i|--info)
+      LOGLEVEL="[INFO] ";;
+  -w|--warning)
+      LOGLEVEL="[WARN] ";;
+  -e|--error)
+      LOGLEVEL="[ERROR]";;
+  -f|--fatal)
+      LOGLEVEL="[FATAL]";;
+	*)
+      MESSAGE=$@
+      break;;
+    esac
+
+    shift
+done
+
+
+
+# --- Main Body ---
+DATE=$(date "+%Y-%m-%d %H:%M:%S")
+
+echo "$DATE $LOGLEVEL $MESSAGE"
+
+exit 0
