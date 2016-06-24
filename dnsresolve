@@ -85,4 +85,20 @@ RESULT=$(host $HOST $SERVER)
 IPV4ADDRS=$(echo "$RESULT" | grep "has address"  | rev | cut -d" " -f1 | rev)
 IPV6ADDRS=$(echo "$RESULT" | grep "IPv6 address" | rev | cut -d" " -f1 | rev)
 
+# Output DNS information
+echo "Host: $HOST"
+if [ "$SERVER" = "" ]; then
+  echo "DNS: default"
+else
+  echo "DNS: $SERVER"
+fi
+
+for ADDR in $IPV4ADDRS; do
+  echo "IPv4: $ADDR"
+done
+
+for ADDR in $IPV6ADDRS; do
+  echo "IPv6: $ADDR"
+done
+
 exit 0
