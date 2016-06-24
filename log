@@ -79,8 +79,6 @@ do
     shift
 done
 
-
-
 # --- Main Body ---
 DATE=$(date "+%Y-%m-%d %H:%M:%S")
 
