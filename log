@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# ------------------------------------------------------------------
+#  Author: Matthew Remmel (matt.remmel@gmail.com)
+#  Title: log
+#
+#  Description: Writes a formatted log message to standard out
+#
+#  Return:      A 0 is returned if the script runs as normal
+#
+#  Dependency:  date
+# ------------------------------------------------------------------
+
+# --- Version and Usage ---
+DESCRIPTION="Description: Writes a formatted log message to standard out"
+VERSION=0.1.0
+USAGE="Usage: log [OPTIONS] MESSAGE
+
+Options:
+-h, --help       Show help and usage information
+-v, --version    Show version information"
+
+# --- Dependecy Check ---
+command -v date >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'date' not installed. Exiting."; exit 1; }
+
+# --- Arguments ---
+# Check that there is at least one argument. If not show usage.
+if [ $# -eq 0 ]; then
+    echo "$DESCRIPTION"
+    echo
+    echo "$USAGE"
+    echo
+    exit 1
+fi
