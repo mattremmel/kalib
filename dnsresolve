@@ -80,5 +80,9 @@ done
 HOST=$1
 
 # --- Main Body ---
+# Retreive and parse IPv4 and IPv6 addresses
+RESULT=$(host $HOST $SERVER)
+IPV4ADDRS=$(echo "$RESULT" | grep "has address"  | rev | cut -d" " -f1 | rev)
+IPV6ADDRS=$(echo "$RESULT" | grep "IPv6 address" | rev | cut -d" " -f1 | rev)
 
 exit 0
