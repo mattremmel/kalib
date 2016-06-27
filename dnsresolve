@@ -41,6 +41,7 @@ fi
 SERVER=""
 IPV4ONLY=1
 IPV6ONLY=1
+NOFORMAT=1
 
 while [[ $# > 1 ]]
 do
@@ -68,6 +69,9 @@ do
 	-6|--ipv6)
 	    IPV6ONLY=0
 	    ;;
+  -n|--no-format)
+      NOFORMAT=0
+      ;;
 	*)
 	    echo "Unknown argument: $key"
 	    exit 1
@@ -86,22 +90,32 @@ IPV4ADDRS=$(echo "$RESULT" | grep "has address"  | rev | cut -d" " -f1 | rev)
 IPV6ADDRS=$(echo "$RESULT" | grep "IPv6 address" | rev | cut -d" " -f1 | rev)
 
 # Output DNS information
-echo "Host: $HOST"
-if [ "$SERVER" = "" ]; then
-  echo "DNS: default"
-else
-  echo "DNS: $SERVER"
+if [ $NOFORMAT -eq 1 ]; then
+  echo "Host: $HOST"
+  if [ "$SERVER" = "" ]; then
+    echo "DNS: default"
+  else
+    echo "DNS: $SERVER"
+  fi
 fi
 
 if [ $IPV6ONLY -eq 1 ]; then
   for ADDR in $IPV4ADDRS; do
-    echo "IPv4: $ADDR"
+    if [ $NOFORMAT -eq 1 ]; then
+      echo "IPv4: $ADDR"
+    else
+      echo "$ADDR"
+    fi
   done
 fi
 
 if [ $IPV4ONLY -eq 1 ]; then
   for ADDR in $IPV6ADDRS; do
-    echo "IPv6: $ADDR"
+    if [ $NOFORMAT -eq 1 ]; then
+      echo "IPv6: $ADDR"
+    else
+      echo "$ADDR"
+    fi
   done
 fi
 
