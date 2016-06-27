@@ -53,25 +53,19 @@ do
 	    echo
 	    echo "$USAGE"
 	    echo
-	    exit 0
-	    ;;
+	    exit 0;;
 	-v|--version)
 	    echo "Version: $VERSION"
-	    exit 0
-	    ;;
+	    exit 0;;
   -s|--server)
       SERVER="$2"
-      shift
-      ;;
+      shift;;
 	-4|--ipv4)
-	    IPV4ONLY=0
-	    ;;
+	    IPV4ONLY=0;;
 	-6|--ipv6)
-	    IPV6ONLY=0
-	    ;;
+	    IPV6ONLY=0;;
   -n|--no-format)
-      NOFORMAT=0
-      ;;
+      NOFORMAT=0;;
 	*)
 	    echo "Unknown argument: $key"
 	    exit 1
