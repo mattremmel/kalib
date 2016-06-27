@@ -93,12 +93,16 @@ else
   echo "DNS: $SERVER"
 fi
 
-for ADDR in $IPV4ADDRS; do
-  echo "IPv4: $ADDR"
-done
+if [ $IPV6ONLY -eq 1 ]; then
+  for ADDR in $IPV4ADDRS; do
+    echo "IPv4: $ADDR"
+  done
+fi
 
-for ADDR in $IPV6ADDRS; do
-  echo "IPv6: $ADDR"
-done
+if [ $IPV4ONLY -eq 1 ]; then
+  for ADDR in $IPV6ADDRS; do
+    echo "IPv6: $ADDR"
+  done
+fi
 
 exit 0
