@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# ------------------------------------------------------------------
+#  Author: Matthew Remmel (matt.remmel@gmail.com)
+#  Title: PrettyJSON
+#
+#  Description: PrettyJSON is a script that reads JSON from standard
+#               in and pretty prints it to standard out.
+#
+#  Return:      A 1 is returned if there is a problem parsing the
+#               JSON. A 0 is returned otherwise.
+#
+#  Dependency:  cat, grep
+# ------------------------------------------------------------------
+
+# --- Version and Usage ---
+DESCRIPTION="Description: Reads JSON from standard in and prints it to
+standard out"
+VERSION=0.1.0
+USAGE="Usage: [json] | prettyjson
+
+Options:
+-h, --help       Show help and usage information
+-v, --version    Show version information"
+
+# --- Dependecy Check ---
+command -v cat >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'cat' not installed. Exiting."; exit 1; }
+command -v grep >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'grep' not installed. Exiting."; exit 1; }
+command -v seq >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'seq' not installed. Exiting."; exit 1; }
+
+# --- Arguments ---
+while [[ $# > 0 ]]
+do
+    key="$1"
+
+    case $key in
+	-h|--help)
+	    echo "$DESCRIPTION"
+	    echo
+	    echo "$USAGE"
+	    echo
+	    exit 0;;
+	-v|--version)
+	    echo "Version: $VERSION"
+	    exit 0;;
+	*)
+	    echo "Unknown argument: $key"
+	    exit 1
+	    ;;
+    esac
+
+    shift
+done
+
+# --- Main Body ---
+INPUT=$(cat "-")
+
+echo $INPUT
+
+exit 0
