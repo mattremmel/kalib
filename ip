@@ -13,7 +13,7 @@
 #  Return:      A 1 is returned if the external IP address cannot
 #               be retreived. A 0 is returned otherwise.
 #
-#  Dependency:  wget
+#  Dependency:  curl, wget
 # ------------------------------------------------------------------
 
 # --- Version and Usage ---
@@ -29,6 +29,7 @@ Options:
 
 # --- Dependecy Check ---
 command -v curl >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'curl' not installed. Exiting."; exit 1; }
+command -v grep >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'grep' not installed. Exiting."; exit 1; }
 
 # --- Arguments ---
 INTERNALONLY=1
