@@ -16,7 +16,7 @@
 # --- Version and Usage ---
 DESCRIPTION="Description: Reads JSON from standard in and prints it to
 standard out"
-VERSION=0.1.0
+VERSION=0.1.1
 USAGE="Usage: [json] | prettyjson
 
 Options:
@@ -69,7 +69,7 @@ PRINT_BUFF() {
   # Add Tab Indent
   if [ $INDENT -ne 0 ]; then
     for i in $(seq 1 $INDENT); do
-      OUTPUT="$OUTPUT\t"
+      OUTPUT="$OUTPUT   "
     done
   fi
 
