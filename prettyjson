@@ -17,11 +17,12 @@
 DESCRIPTION="Description: Reads JSON from standard in and prints it to
 standard out"
 VERSION=0.1.1
-USAGE="Usage: [json] | prettyjson
+USAGE="Usage: {json} | prettyjson [option]
 
 Options:
 -h, --help       Show help and usage information
--v, --version    Show version information"
+-v, --version    Show version information
+-i, --indent     Specify the number of added spaces per indent level"
 
 # --- Dependecy Check ---
 command -v cat >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'cat' not installed. Exiting."; exit 1; }
@@ -29,6 +30,8 @@ command -v grep >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'grep' not ins
 command -v seq >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'seq' not installed. Exiting."; exit 1; }
 
 # --- Arguments ---
+INDCNT=3
+
 while [[ $# > 0 ]]
 do
     key="$1"
@@ -43,10 +46,12 @@ do
 	-v|--version)
 	    echo "Version: $VERSION"
 	    exit 0;;
+  -i|--indent)
+      INDCNT=$2
+      shift;;
 	*)
 	    echo "Unknown argument: $key"
-	    exit 1
-	    ;;
+	    exit 1;;
     esac
 
     shift
@@ -68,8 +73,8 @@ PRINT_BUFF() {
 
   # Add Tab Indent
   if [ $INDENT -ne 0 ]; then
-    for i in $(seq 1 $INDENT); do
-      OUTPUT="$OUTPUT   "
+    for i in $(seq 1 $((INDENT*INDCNT))); do
+      OUTPUT="$OUTPUT "
     done
   fi
 
