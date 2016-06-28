@@ -53,8 +53,78 @@ do
 done
 
 # --- Main Body ---
-INPUT=$(cat "-")
+INPUT=$(cat "-" | grep -o .)
+INDENT=0
+BUFF=""
+FORMJSON=""
 
-echo $INPUT
+PRINT_BUFF() {
+  OUTPUT=""
+
+  # Avoid adding newline to beginning of output
+  if [ "$FORMJSON" != "" ]; then
+    OUTPUT="$OUTPUT\n"
+  fi
+
+  # Add Tab Indent
+  if [ $INDENT -ne 0 ]; then
+    for i in $(seq 1 $INDENT); do
+      OUTPUT="$OUTPUT\t"
+    done
+  fi
+
+  # Update output and clear buffer
+  OUTPUT="$OUTPUT$BUFF"
+  FORMJSON="$FORMJSON$OUTPUT"
+  BUFF=""
+}
+
+for c in $INPUT; do
+
+  # Opening brace
+  if [ $c = "{" ]; then
+    BUFF="$BUFF$c"
+    PRINT_BUFF
+    INDENT=$((INDENT+1))
+
+  # Closing brace
+  elif [ $c = "}" ]; then
+    PRINT_BUFF
+    INDENT=$((INDENT-1))
+    BUFF="$BUFF$c"
+
+  # Colon
+  elif [ $c = ":" ]; then
+    BUFF="$BUFF $c "
+
+  # Opening bracket
+  elif [ $c = "[" ]; then
+    BUFF="$BUFF$c"
+    PRINT_BUFF
+    INDENT=$((INDENT+1))
+
+  # Closing bracket
+  elif [ $c = "]" ]; then
+    PRINT_BUFF
+    INDENT=$((INDENT-1))
+    BUFF="$BUFF$c"
+
+  # Comma
+  elif [ $c = "," ]; then
+    BUFF="$BUFF$c"
+    PRINT_BUFF
+
+  # Non Whitespace
+  elif [ $c != " " ] && [ $c != "\n" ] && [ $c != "\t" ]; then
+    BUFF="$BUFF$c"
+  fi
+
+done
+
+# Print remaining buffer
+PRINT_BUFF
+
+# Write output to standard out
+echo -e "$FORMJSON"
 
 exit 0
