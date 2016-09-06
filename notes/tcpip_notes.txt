@@ -1,0 +1,4 @@
+TCP/IP Notes
+
+- Three Way Handshake
+  The normal process of establishing a connection between a TCP client and server involves three steps: the client sends a SYN message; the server sends a message that combines an ACK for the client’s SYN and contains the server’s SYN; and then the client sends an ACK for the server’s SYN. This is called the TCP three-way handshake.
