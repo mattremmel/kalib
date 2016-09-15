@@ -1,0 +1,5 @@
+
+Scan Types:
+
+- TCP Connect() Scan
+  This is the most basic form of scanning that uses the UNIX connect command to attempt to connect to a port. If the connection succeeds, the port is open, if it fails, the system is offline, the port is closed, or an error occurred. This type of scan is easy to detect and will likely be logged in the target system.
