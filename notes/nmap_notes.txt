@@ -24,3 +24,6 @@ Scan Types:
 
 - Version Detection Scan [-sV]
   Version Detection collects information about the specific service running on an open port, including the product name and version number. This information can be critical in determining an entry point for an attack. Version detection is based on a complex series of probes, detailed in the Version Detection paper at http://www.insecure.org/nmap/vscan/
+
+- ACK Scan [-sA]
+  Usually used to map firewall rulesets and distinguish between stateful and stateless firewalls, this scan type sends ACK packets to a host. If an RST comes back, the port is classified "unfiltered" (that is, it was allowed to send its RST through whatever firewall was in place). If nothing comes back, the port is said to be "filtered". That is, the firewall prevented the RST coming back from the port. This scan type can help determine if a firewall is stateless or stateful and tracks connections and also blocks unsolicited ACK packets.
