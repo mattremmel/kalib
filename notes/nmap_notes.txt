@@ -34,6 +34,9 @@ Port Specification and Options:
 - Specify Ports [-p <port ranges>]
   This option specifies which ports you want to scan and overrides the default. Individual port numbers separated by comma are valid, as are ranges separated by a hyphen (e.g. 1-1023). When scanning a combination of protocols, you can specify a particular protocol by preceding the port numbers by T: for TCP, U: for UDP, S: for SCTP, or P: for IP Protocol. The qualifier lasts until you specify another qualifier. For example, the argument -p U:53,111,137,T:21-25,80,139,8080 would scan UDP ports 53, 111,and 137, as well as the listed TCP ports. Note that to scan both UDP and TCP, you have to specify -sU and at least one TCP scan type (such as -sS, -sF, or -sT). If no protocol qualifier is given, the port numbers are added to all protocol lists.
 
+  - Exclude Ports [--exclude-ports <port ranges>]
+  This option specifies which ports you do want Nmap to exclude from scanning. The <port ranges> are specified similar to -p. For IP protocol scanning (-sO), this option specifies the protocol numbers you wish to exclude (0–255). When ports are asked to be excluded, they are excluded from all types of scans. This also includes the discovery phase.
+
 
 Version and Service Options:
 
