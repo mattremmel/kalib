@@ -40,6 +40,9 @@ Port Specification and Options:
 - Fast Scan [-F]
   Specifies that you wish to scan fewer ports than the default. Normally Nmap scans the most common 1,000 ports for each scanned protocol. With -F, this is reduced to 100. Nmap needs an nmap-services file with frequency information in order to know which ports are the most common. If port frequency information isn't available Nmap scans all named ports plus ports 1-1024. In that case, -F means to scan only ports that are named in the services file.
 
+- Top Ports [--top-ports <n>]
+  Scans the <n> highest-ratio ports found in nmap-services file after excluding all ports specified by --exclude-ports. <n> must be 1 or greater.
+
 
 Version and Service Options:
 
