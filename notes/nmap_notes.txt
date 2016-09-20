@@ -65,3 +65,12 @@ Fingerprinting Options:
 
 - Comprehensive Fingerprint [-A]
   Enable OS detection, version detection, script scanning, and traceroute
+
+
+Output Options:
+
+- Normal Output [-oN <filespec>]
+  Requests that normal output be directed to the given filename.
+
+- XML Output [-oX <filespec]
+  Requests that XML output be directed to the given filename. Nmap includes a document type definition (DTD) which allows XML parsers to validate Nmap XML output. https://svn.nmap.org/nmap/docs/nmap.dtd
