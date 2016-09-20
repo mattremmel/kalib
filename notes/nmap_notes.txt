@@ -46,10 +46,16 @@ Port Specification and Options:
   Scans the <n> highest-ratio ports found in nmap-services file after excluding all ports specified by --exclude-ports. <n> must be 1 or greater.
 
 
-Version and Service Options:
+Fingerprinting Options:
 
 - Version Detection Scan [-sV]
   Version Detection collects information about the specific service running on an open port, including the product name and version number. This information can be critical in determining an entry point for an attack. Version detection is based on a complex series of probes, detailed in the Version Detection paper at http://www.insecure.org/nmap/vscan/
 
 - Version Intensity [--version-intensity <intensity>]
   When performing a version scan , Nmap sends a series of probes, each of which is assigned a rarity value between one and nine. The lower-numbered probes are effective against a wide variety of common services, while the higher-numbered ones are rarely useful. The intensity level specifies which probes should be applied. The higher the number, the more likely it is the service will be correctly identified. However, high intensity scans take longer. The intensity must be between 0 and 9. The default is 7. When a probe is registered to the target port via the nmap-service-probes ports directive, that probe is tried regardless of intensity level. This ensures that the DNS probes will always be attempted against any open port 53, the SSL probe will be done against 443, etc.
+
+- OS Detection [-O]
+  Nmap sends a series of TCP and UDP packets to the remote host and examines practically every bit in the responses. After performing dozens of tests such as TCP ISN sampling, TCP options support and ordering, IP ID sampling, and the initial window size check, Nmap compares the results to its nmap-os-db database of more than 2,600 known OS fingerprints and prints out the OS details if there is a match.
+
+- Comprehensive Fingerprint [-A]
+  Enable OS detection, version detection, script scanning, and traceroute
