@@ -3,6 +3,9 @@ Host Discovery:
 - Discovery - No Port Scan [-sn]
   This is often known as a ping scan. The default host discovery done with -sn consists of an ICMP echo request, TCP SYN to port 443, TCP ACK to port 80, and an ICMP timestamp request by default.
 
+- TCP SYN Ping [-PS]
+  This option sends an empty TCP packet with the SYN flag set. The default destination port is 80. If a response is received, the host is up.
+
 
 Scan Types:
 
