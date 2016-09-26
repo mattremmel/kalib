@@ -5,7 +5,7 @@ Overview:
 
 Host Discovery:
 
-- Ping Scan [-sP]
+- Ping Scan [-sn]
   This scan lists the hosts within the specified range that responded to a ping. It allows you to detect which computers are online, rather than which ports are open. The first method sends an ICMP ECHO REQUEST (ping request) packet to the destination system. If an ICMP ECHO REPLY is received, the system is up, and ICMP packets are not blocked. If there is no response to the ICMP ping, Nmap will try a "TCP Ping", to determine whether ICMP is blocked, or if the host is really not online. A TCP Ping sends either a SYN or an ACK packet to any port (80 is the default) on the remote system. If RST, or a SYN/ACK, is returned, then the remote system is online. If the remote system does not respond, either it is offline, or the chosen port is filtered, and thus not responding to anything. When you run an Nmap ping scan as root, the default is to use the ICMP and ACK methods. Non-root users will use the connect() method. The ICMP scan type can be disabled by setting -P0 (-P'ZERO').
 
 
