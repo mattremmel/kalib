@@ -1,3 +1,8 @@
+Overview:
+
+  Nmap is a utility for network discovery and security auditing. Nmap uses raw IP packets in novel ways to determine what hosts are available on the network, what services (application name and version) those hosts are offering, what operating systems (and OS versions) they are running, what type of packet filters/firewalls are in use, and dozens of other characteristics.
+
+
 Host Discovery:
 
 - Ping Scan [-sP]
@@ -74,3 +79,8 @@ Output Options:
 
 - XML Output [-oX <filespec]
   Requests that XML output be directed to the given filename. Nmap includes a document type definition (DTD) which allows XML parsers to validate Nmap XML output. https://svn.nmap.org/nmap/docs/nmap.dtd
+
+
+Advanced Options:
+
+  Refer to the Man pages for advanced a specific options that can be used to very specifically audit and analyze firewall and network rules, either implemented on the a network firewall or a host firewall.
