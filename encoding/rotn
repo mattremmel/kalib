@@ -20,7 +20,7 @@ DESCRIPTION="Description: RotN is a script that takes input and either
 rotates the characters by 13 characters, or 47 characters, to the effect
 of creating an invertable substitution cipher. Default encoding is Rot47."
 VERSION=0.1.0
-USAGE="Usage: rotn [options] input
+USAGE="Usage: {input} | rotn [options] input
 
 Options:
 -h, --help       Show help and usage information
