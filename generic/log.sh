@@ -20,6 +20,7 @@ USAGE="Usage: log [OPTIONS] MESSAGE
 Options:
 -h, --help       Show help and usage information
 -v, --version    Show version information
+-m, --message    Specify the message to log
 -l, --logfile    Specify log file to write to
 -t, --trace      Return trace style message
 -d, --debug      Return debug style message
