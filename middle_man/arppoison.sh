@@ -52,7 +52,7 @@ echo "Scanning for Live Hosts..."
 HOSTS=`nmap -sn $NETWORK.1-254 |grep report`
 
 if [ "$HOSTS" ]
-then 
+then
 
 echo "***************************"
 echo "List of Live Hosts:"
