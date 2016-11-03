@@ -33,7 +33,7 @@ command -v cat >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'cat' not insta
 command -v tr >/dev/null 2>&1 || { echo >&2 "[ERROR] Dependency 'tr' not install. Exiting."; exit 1; }
 
 # --- Arguments ---
-ROT47=1
+ROT47=0
 
 while [[ $# > 0 ]]
 do
