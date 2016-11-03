@@ -9,7 +9,7 @@
 #  Return:      A 0 is returned if the server starts without error.
 #               A 1 is returned otherwise.
 #
-#  Dependency:  host
+#  Dependency:  ssh
 # ------------------------------------------------------------------
 
 # --- Version and Usage ---
