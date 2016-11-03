@@ -4,7 +4,7 @@
 #  Author: Matthew Remmel (matt.remmel@gmail.com)
 #  Title: dnsresolve
 #
-#  Description: Lists the IP addressed associated with a provided
+#  Description: Lists the IP addresses associated with a provided
 #               hostname.
 #
 #  Return:      A 0 is returned if the lookup finishes without error.
@@ -68,8 +68,7 @@ do
       NOFORMAT=0;;
 	*)
 	    echo "Unknown argument: $key"
-	    exit 1
-	    ;;
+	    exit 1;;
     esac
 
     shift
